@@ -1,6 +1,4 @@
-import re
-
-with open('Day1_input.txt') as f:
+with open('../data/Day1_input.txt') as f:
     lines = f.readlines()
 
 
