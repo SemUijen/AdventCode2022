@@ -92,6 +92,9 @@ class Tree:
 
                 if child.Type == 'dir' and child.Size <= 100000:
                     score += child.Size
+                    print(child.Name)
+                    print(child.Size)
+                    print(score)
                 score = self._find_largeDir(child, score)
 
 

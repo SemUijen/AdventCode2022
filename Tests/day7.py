@@ -1,4 +1,4 @@
-lines = open('../data/day7_test.txt', 'r')
+lines = open('../data/day7_input.txt', 'r')
 from functions.Tree import Tree, Node
 
 
@@ -43,6 +43,7 @@ def Create_tree():
 
 def day7_part1():
     dir_tree = Create_tree()
+    dir_tree.printTree()
     score = dir_tree.find_largeDir()
 
     return score
