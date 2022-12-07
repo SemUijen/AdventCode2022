@@ -1,6 +1,7 @@
 lines = open('../data/day7_input.txt', 'r')
 from functions.Tree import Tree, Node
 
+#directory names are not unique!
 
 def Create_tree():
     dir_tree_dict = {}

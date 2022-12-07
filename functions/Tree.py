@@ -17,7 +17,7 @@ class Node:
 
     def add_Node(self, Name, Type):
         level = self.Level + 1
-        ID = self.ID + (len(self.children) + 1) / 100 ** self.Level
+        ID = self.ID + (len(self.children) + 1) / 1000 ** self.Level
         self.children.append(
             Node(ID, level, self, Name, Type))
 
