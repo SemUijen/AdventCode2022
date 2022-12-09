@@ -1,3 +1,6 @@
+from decimal import Decimal
+
+
 # Classes
 class Node:
     def __init__(self, ID, level, Parent, Name, Type):
@@ -10,6 +13,12 @@ class Node:
         self.Type = Type
         self.Size = 0
 
+    def children_to_childvalues(self):
+        temp_list = []
+        for child in self.children:
+            temp_list.append(child.Name)
+        return temp_list
+
     def Node_tostring(self):
         String = ('- ' + str(self.Name) + ' ' + str(self.Type) + ' ' + 'size: ' + str(self.Size) + ' ' + str(self.ID))
         String = str(String)
@@ -17,7 +26,8 @@ class Node:
 
     def add_Node(self, Name, Type):
         level = self.Level + 1
-        ID = self.ID + (len(self.children) + 1) / 100 ** self.Level
+        ID = Decimal(str(self.ID)) + Decimal(str((len(self.children) + 1))) / Decimal(str(100)) ** Decimal(
+            str(self.Level))
         self.children.append(
             Node(ID, level, self, Name, Type))
 
@@ -82,20 +92,35 @@ class Tree:
 
             score = self._find_largeDir(self.root, score)
 
-        print(score)
         return score
 
     def _find_largeDir(self, node, score):
 
-        if node.children != []:
+        if node.children:
             for child in node.children:
 
                 if child.Type == 'dir' and child.Size <= 100000:
                     score += child.Size
-                    print(child.Name)
-                    print(child.Size)
-                    print(score)
+
                 score = self._find_largeDir(child, score)
-
-
         return score
+
+    def find_bestDir(self, min_to_remove):
+        best_dir_size = 0
+        if self.root is not None:
+            if self.root.Size >= min_to_remove:
+                best_dir_size = self.root.Size
+
+            best_dir_size = self._find_bestDir(self.root, best_dir_size, min_to_remove)
+
+        return best_dir_size
+
+    def _find_bestDir(self, node, best_dir_size,min_to_remove):
+        if node.children:
+            for child in node.children:
+                if child.Type == 'dir' and child.Size >= min_to_remove:
+                    if child.Size < best_dir_size:
+                        best_dir_size = child.Size
+
+                best_dir_size = self._find_bestDir(child, best_dir_size,min_to_remove)
+        return best_dir_size
