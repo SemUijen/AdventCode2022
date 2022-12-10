@@ -1,6 +1,8 @@
-lines = open('../data/day8_test.txt', 'r')
 import numpy as np
 import re
+
+
+lines = open('../data/day8_test.txt', 'r')
 def build_matrix():
     temp_matrix = []
     for line in lines:

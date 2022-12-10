@@ -69,4 +69,5 @@ def day7_part2():
 
     return score
 
-#test
+
+print(day7_part2())
