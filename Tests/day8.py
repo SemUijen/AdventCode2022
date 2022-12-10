@@ -21,7 +21,7 @@ def day1_part1():
             score += 1
 
 
-
+#test
     return score
 print(day1_part1())
 

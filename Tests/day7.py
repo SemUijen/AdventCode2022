@@ -69,3 +69,4 @@ def day7_part2():
 
     return score
 
+#test
