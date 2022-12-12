@@ -17,7 +17,7 @@ def build_matrix():
 
 def day1_part1():
     tree_matrix = build_matrix()
-    visibleTree_matrix = np.zeros(tree_matrix.shape)
+
     score = 0
     for position, tree in np.ndenumerate(tree_matrix):
 
