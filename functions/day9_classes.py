@@ -39,11 +39,12 @@ class Head:
             self.x_pos = new_x
 
 class Tail:
-    def __init__(self, x_pos, y_pos, matrix):
+    def __init__(self, x_pos, y_pos, matrix, tail):
         self.x_pos= x_pos
         self.y_pos = y_pos
         self.matrix = matrix
 
+        self.tail = tail
     def move(self, x_pos, y_pos):
         self.x_pos = x_pos
         self.y_pos = y_pos
