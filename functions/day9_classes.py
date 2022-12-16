@@ -1,5 +1,6 @@
 class Head:
-    def __init__(self, x_pos, y_pos, tail):
+    def __init__(self, id, x_pos, y_pos, tail):
+        self.id = id
         self.x_pos = x_pos
         self.y_pos = y_pos
         self.tail = tail
@@ -45,7 +46,7 @@ class Head:
         return self
 
     def _find_tail(self, Tail):
-
+        #print(Tail.id, Tail.y_pos, Tail.x_pos)
         if Tail.tail is not None:
             Tail = self._find_tail(Tail.tail)
 
@@ -68,9 +69,7 @@ class Tail:
             self._move(x_pos, y_pos, step, axis)
 
         else:
-            print(self.id)
-            print(self.x_pos, self.y_pos)
-            print(x_pos, y_pos)
+
             self.x_pos = x_pos
             self.y_pos = y_pos
             self.add_trace()
@@ -87,8 +86,8 @@ class Tail:
         if abs(self.y_pos - self.tail.y_pos) > 1 or abs(self.x_pos - self.tail.x_pos) > 1:
 
             if self.y_pos != self.tail.y_pos and self.x_pos != self.tail.x_pos:
-                #print(self.id, self.tail.id)
-                #print(self.x_pos, self.tail.x_pos, self.y_pos, self.tail.y_pos)
+                # print(self.id, self.tail.id)
+                # print(self.x_pos, self.tail.x_pos, self.y_pos, self.tail.y_pos)
 
                 if self.x_pos - self.tail.x_pos < 0 and self.y_pos - self.tail.y_pos < 0:
                     self.tail.move(self.tail.x_pos - 1, self.tail.y_pos - 1, axis, step)
@@ -104,7 +103,47 @@ class Tail:
 
             else:
                 if axis == 'y':
-                    self.tail.move(self.tail.x_pos, self.tail.y_pos + step, axis, step)
+                    if self.x_pos - self.tail.x_pos < - 1:
+                        if self.y_pos != self.tail.y_pos:
+                            self.tail.move(self.tail.x_pos - 1, self.tail.y_pos + step, axis, step)
+                        else:
+                            self.tail.move(self.tail.x_pos - 1, self.tail.y_pos, axis, step)
+
+
+                    elif self.x_pos - self.tail.x_pos > 1:
+                        if self.y_pos != self.tail.y_pos:
+                            self.tail.move(self.tail.x_pos + 1, self.tail.y_pos + step, axis, step)
+                        else:
+                            self.tail.move(self.tail.x_pos + 1, self.tail.y_pos, axis, step)
+
+
+                    else:
+                        if self.y_pos != self.tail.y_pos:
+                            if self.y_pos != self.tail.y_pos:
+                                self.tail.move(self.tail.x_pos, self.tail.y_pos + step, axis, step)
+                            else:
+                                self.tail.move(self.tail.x_pos, self.tail.y_pos, axis, step)
+
+
 
                 if axis == 'x':
-                    self.tail.move(self.tail.x_pos + step, self.tail.y_pos, axis, step)
+
+                    if self.y_pos - self.tail.y_pos > 1:
+                        if self.x_pos != self.tail.x_pos:
+                            self.tail.move(self.tail.x_pos + step, self.tail.y_pos + 1, axis, step)
+                        else:
+                            self.tail.move(self.tail.x_pos, self.tail.y_pos + 1, axis, step)
+
+                    elif self.y_pos - self.tail.y_pos < - 1:
+                        if self.x_pos != self.tail.x_pos:
+                            self.tail.move(self.tail.x_pos + step, self.tail.y_pos - 1, axis, step)
+                        else:
+                            self.tail.move(self.tail.x_pos, self.tail.y_pos - 1, axis, step)
+
+                    else:
+                        if self.x_pos != self.tail.x_pos:
+                            self.tail.move(self.tail.x_pos + step, self.tail.y_pos, axis, step)
+                        else:
+                            self.tail.move(self.tail.x_pos, self.tail.y_pos, axis, step)
+
+

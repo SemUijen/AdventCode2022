@@ -4,7 +4,7 @@ import copy
 import sys
 import pandas as pd
 np.set_printoptions(threshold=sys.maxsize)
-import ipywidgets as widgets
+from matplotlib import pyplot as plt
 
 from IPython.display import display, HTML
 def largest_grid_needed(lines):
@@ -30,35 +30,35 @@ def largest_grid_needed(lines):
 
 # what is going on with the lines textwrapper here? after looping through in function largest grid the other loop wont work anymore
 def day9_part1():
-    line1 = open('../data/day9_test2.txt', 'r')
-    lines = open('../data/day9_test2.txt', 'r')
+    line1 = open('../data/day9_input.txt', 'r')
+    lines = open('../data/day9_input.txt', 'r')
     Matrix = largest_grid_needed(lines)
 
     shape = Matrix.shape
     starting_position = (round(shape[0] / 2), round(shape[1] / 2))
     Matrix[starting_position] = 1
 
-    head = Head(starting_position[1], starting_position[0],
+    head = Head(0,starting_position[1], starting_position[0],
                 Tail(1, starting_position[1], starting_position[0], Matrix, None))
 
     for line in line1:
         direction, steps = line.split()
         head.move(direction=direction, steps=int(steps))
 
-    print(head.tail.matrix)
+
     return head.tail.matrix.sum()
 
 
 def day9_part2():
-    line1 = open('../data/day9_test.txt', 'r')
-    lines = open('../data/day9_test.txt', 'r')
+    line1 = open('../data/day9_input.txt', 'r')
+    lines = open('../data/day9_input.txt', 'r')
     Matrix = largest_grid_needed(lines)
 
     shape = Matrix.shape
     starting_position = (round(shape[0] / 2), round(shape[1] / 2))
     Matrix[starting_position] = 1
-
-    head = Head(starting_position[1], starting_position[0],
+    print(starting_position)
+    head = Head(0,starting_position[1], starting_position[0],
                 Tail(1, starting_position[1], starting_position[0], None,
                      Tail(2, starting_position[1], starting_position[0], None,
                           Tail(3, starting_position[1], starting_position[0], None,
@@ -67,8 +67,8 @@ def day9_part2():
                                          Tail(6, starting_position[1], starting_position[0], None,
                                               Tail(7, starting_position[1], starting_position[0], None,
                                                    Tail(8, starting_position[1], starting_position[0], None,
-                                                        Tail(9, starting_position[1], starting_position[0], Matrix,
-                                                             None))))))))))
+                                                        Tail(9, starting_position[1], starting_position[0], Matrix, None))))))))))
+
 
     for line in line1:
         direction, steps = line.split()
@@ -76,31 +76,13 @@ def day9_part2():
 
     # print(head.tail.matrix.sum())
     # print(head.find_tail().matrix)
+    x = head.find_tail().matrix
+    plt.imshow(x, interpolation='nearest')
+    plt.show()
+    return x.sum()
 
-    # sample data
-    df1 = pd.DataFrame(head.find_tail().matrix)
-
-
-    # create output widgets
-    widget1 = widgets.Output()
-
-
-    # render in output widgets
-    with widget1:
-        display.display(df1)
-
-
-    # create HBox
-    hbox = widgets.HBox([widget1])
-
-    # render hbox
-    hbox
-    return head.find_tail().matrix.sum()
 
 
 print(day9_part2())
-
-
-
 
 
