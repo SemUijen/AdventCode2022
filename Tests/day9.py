@@ -2,10 +2,11 @@ import numpy as np
 from functions.day9_classes import Head, Tail
 import copy
 import sys
-
+import pandas as pd
 np.set_printoptions(threshold=sys.maxsize)
+import ipywidgets as widgets
 
-
+from IPython.display import display, HTML
 def largest_grid_needed(lines):
     up = 0
     right = 0
@@ -75,12 +76,31 @@ def day9_part2():
 
     # print(head.tail.matrix.sum())
     # print(head.find_tail().matrix)
-    print(head.find_tail().id)
-    print(head.find_tail().matrix)
+
+    # sample data
+    df1 = pd.DataFrame(head.find_tail().matrix)
+
+
+    # create output widgets
+    widget1 = widgets.Output()
+
+
+    # render in output widgets
+    with widget1:
+        display.display(df1)
+
+
+    # create HBox
+    hbox = widgets.HBox([widget1])
+
+    # render hbox
+    hbox
     return head.find_tail().matrix.sum()
 
 
 print(day9_part2())
+
+
 
 
 
