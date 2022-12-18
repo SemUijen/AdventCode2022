@@ -1,5 +1,8 @@
 import operator
 import math
+from decimal import Decimal
+import sys
+from decimal import Context
 
 class KeepAwayGroup:
     def __init__(self):
@@ -27,6 +30,7 @@ class KeepAwayGroup:
         highest_scores = []
         if self.Monkeys:
             for monkey in self.Monkeys:
+                print(monkey.number_inspected)
                 highest_scores.append(monkey.number_inspected)
 
             highest_scores.sort(reverse=True)
@@ -56,12 +60,12 @@ class Monkey:
             val = item
             ops = {"+": operator.add, "-": operator.sub, "*": operator.mul}
 
-            return math.floor((ops[self.inspection_operator](item, val))/3)
+            return math.floor((ops[self.inspection_operator](item, val)) / 3)
         else:
             val = int(self.operation_value)
             ops = {"+": operator.add, "-": operator.sub, "*": operator.mul}
 
-            return math.floor((ops[self.inspection_operator](item, val))/3)
+            return math.floor((ops[self.inspection_operator](item, val)) / 3)
 
     def throw_test(self, item):
         if item % self.test_value == 0:
@@ -70,11 +74,11 @@ class Monkey:
             return self.monkey_false
 
     def to_string(self):
-        string = ("ID: "            + str(self.id),
-                  "Operation: "     + str(self.inspection_operator) + str(self.operation_value),
-                  "Test: "          + str(self.test_value),
-                  "Monkey True: "   + str(self.monkey_true),
-                  "Monkey False: "  + str(self.monkey_false))
+        string = ("ID: " + str(self.id),
+                  "Operation: " + str(self.inspection_operator) + str(self.operation_value),
+                  "Test: " + str(self.test_value),
+                  "Monkey True: " + str(self.monkey_true),
+                  "Monkey False: " + str(self.monkey_false))
 
         return print(str(string))
 
