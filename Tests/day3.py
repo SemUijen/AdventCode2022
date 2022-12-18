@@ -1,6 +1,6 @@
 import string
 
-lines = open('../data/Day3_data.txt', 'r')
+lines = open('../data/Day3_test.txt', 'r')
 
 
 def setup_score_dict():
