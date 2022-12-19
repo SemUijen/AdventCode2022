@@ -4,7 +4,7 @@ import numpy as np
 from functions.class_12 import Path
 
 lines = open('../data/Day12_input.txt', 'r')
-import matplotlib.pyplot as plt
+
 
 
 def Get_matrix():
