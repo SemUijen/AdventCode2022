@@ -3,7 +3,7 @@ import re
 import numpy as np
 from functions.class_12 import Path
 
-lines = open('../data/Day12_test.txt', 'r')
+lines = open('../data/Day12_input.txt', 'r')
 import matplotlib.pyplot as plt
 
 
@@ -43,12 +43,13 @@ def day12_part1():
 
 
 def day12_part2():
-    starting_pos, input_matrix, path_matrix = Get_matrix()
-    path = Path(1, path_matrix, input_matrix, starting_pos[1], starting_pos[0])
-    path.walk()
+    starting_pos, ending_pos, input_matrix, path_matrix = Get_matrix()
+    path = Path(1, path_matrix, input_matrix, ending_pos[1], ending_pos[0])
+    path.reverese_walk()
 
+    print(input_matrix)
     print(path_matrix)
-    print(path.shortest_path)
+    print(path.shortest_path_A)
 
-
+day12_part2()
 
