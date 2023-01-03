@@ -1,41 +1,38 @@
-lines = open('../data/Day13_test.txt', 'r')
-pair_list = lines.read().strip().split("\n\n")
-clean_list = list(map(str.splitlines, pair_list))
-print(clean_list)
 
-def day13_part1(x, y):
-    score = 0
+def day13(x, y):
+
+    if type(x) == int and type(y) == int:
+        return x-y
+    if type(x) == list and type(y) == int:
+        return day13(x, [y])
+    if type(x) == int and type(y) == list:
+        return day13([x], y)
 
     for a, b in zip(x, y):
+        score = day13(a, b)
+        if score:
+            return score
 
-        print('a: ', a, b)
-        if type(a) == int and type(b) == int:
-            if a < b:
-                print('score')
-                return 1
-            if a > b:
-                return 0
+    return len(x) - len(y)
 
-        if type(a) == list and type(b) == list:
-           score = day13_part1(a, b)
-
-        if type(a) == list and type(b) == int:
-            temp_list = []
-            temp_list.append(b)
-            score = day13_part1(a, temp_list)
-
-        if type(a) == int and type(b) == list:
-            temp_list = []
-            temp_list.append(a)
-            score = day13_part1(temp_list, b)
-
-    if score == 2:
-        print(len(x))
-        return 1
-
-    return 1
-score = 0
-for x, y in clean_list:
-    score += day13_part1(eval(x), eval(y))
-
+# part1
+lines = open('../data/Day13_input.txt', 'r')
+pair_list = lines.read().strip().split("\n\n")
+clean_list = list(map(str.splitlines, pair_list))
+score =0
+for i, (x, y) in enumerate(clean_list):
+    if day13(eval(x), eval(y)) <0:
+        score += (i+1)
 print('score: ', score)
+
+# part2
+clean_list_2 = list(map(eval, open('../data/Day13_input.txt', 'r').read().split()))
+i2 = 1
+i6 = 2
+for a in clean_list_2:
+    if day13(a, [[2]]) < 0:
+        i2 += 1
+        i6 += 1
+    elif day13(a, [[6]]) < 0:
+        i6 += 1
+print(i2 * i6)
